@@ -1,46 +1,52 @@
 <main class="main-container">
-  
+
   <header class="header">
     <div class="logo">
       <h1>📊 Mis Encuestas</h1>
     </div>
-    </header>
+  </header>
 
   @if (listaDatos.length === 0) {
-    <div class="empty-state">
-      <p> Cargando o no hay encuestas...</p>
-      <a routerLink="/crear-encuesta" class="btn-link">¡Crea tu primera encuesta!</a>
-    </div>
+  <div class="empty-state">
+    <p>No hay encuestas disponibles.</p>
+    <a routerLink="/crear-encuesta" class="btn-link">¡Crea tu primera encuesta!</a>
+  </div>
   }
 
   <section class="cards-grid">
     @for (item of listaDatos; track item._id) {
-      
-      <article class="card">
-        <div class="card-header">
-          <span class="card-id">ID: {{ item._id | slice:0:6 }}...</span>
-          <h3>{{ item.titulo }}</h3>
-        </div>
-        
-        <div class="card-body">
-          <p class="desc">{{ item.descripcion || 'Sin descripción' }}</p>
-          <small class="date">📅 {{ item.fecha_creacion | date:'dd/MM/yyyy' }}</small>
-        </div>
 
-        <div class="card-footer">
-          <a [routerLink]="['/encuesta', item._id]" class="btn-icon btn-view" title="Ver Detalles">
-            👁️ Ver
-          </a>
+    <article class="card">
+      <div class="card-header">
+        <span class="card-id">ID: {{ item._id | slice:0:6 }}...</span>
+        <h3>{{ item.titulo }}</h3>
+      </div>
 
-          <a [routerLink]="['/editar-encuesta', item._id]" class="btn-icon btn-edit" title="Editar">
-            ✏️ Editar
-          </a>
+      <div class="card-body">
+        <p class="desc">{{ item.descripcion || 'Sin descripción' }}</p>
+        <small class="date">📅 {{ item.fecha_creacion | date:'dd/MM/yyyy' }}</small>
+      </div>
 
-          <button (click)="borrarEncuesta(item._id)" class="btn-icon btn-delete" title="Borrar">
-            🗑️ Borrar
-          </button>
-        </div>
-      </article>
+      <div class="card-footer">
+        <a [routerLink]="['/responder-encuesta', item._id]" class="btn-icon btn-respond" title="Responder Encuesta">
+          📝 Responder
+        </a>
+        <a [routerLink]="['/ver-respuestas', item._id]" class="btn-icon btn-results" title="Ver Resultados">
+          📊 Resultados
+        </a>
+        <a [routerLink]="['/encuesta', item._id]" class="btn-icon btn-view" title="Ver Detalles">
+          👁️ Ver
+        </a>
+
+        <a [routerLink]="['/editar-encuesta', item._id]" class="btn-icon btn-edit" title="Editar">
+          ✏️ Editar
+        </a>
+
+        <button (click)="borrarEncuesta(item._id)" class="btn-icon btn-delete" title="Borrar">
+          🗑️ Borrar
+        </button>
+      </div>
+    </article>
 
     }
   </section>

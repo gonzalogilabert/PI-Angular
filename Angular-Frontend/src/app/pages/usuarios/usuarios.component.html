@@ -1,0 +1,37 @@
+<div class="container fade-in">
+  <div class="header-actions">
+    <h2>Gestión de Usuarios</h2>
+    <a routerLink="/crear-usuario" class="btn-primary">
+      <span class="icon">+</span> Nuevo Usuario
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th class="actions-col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuarios">
+          <td>{{ u.nombre_completo }}</td>
+          <td>{{ u.email }}</td>
+          <td>
+            <span class="badge" [ngClass]="u.rol.toLowerCase()">{{ u.rol }}</span>
+          </td>
+          <td class="actions">
+            <button [routerLink]="['/editar-usuario', u._id]" class="btn-icon" title="Editar">✏️</button>
+            <button (click)="u._id && borrarUsuario(u._id)" class="btn-icon delete" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="usuarios.length === 0">
+          <td colspan="4" class="no-data">No hay usuarios registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

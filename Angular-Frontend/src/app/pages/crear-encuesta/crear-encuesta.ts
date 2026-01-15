@@ -1,8 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/api';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-encuesta',
@@ -11,21 +9,59 @@ import { ApiService } from '../../services/api';
   templateUrl: './crear-encuesta.html',
   styleUrl: './crear-encuesta.scss'
 })
-export class CrearEncuestaComponent implements OnInit {
-  
-  private fb = inject(FormBuilder);
-  private apiService = inject(ApiService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+export class CrearEncuestaComponent {
+  encuestaForm: FormGroup;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  constructor(private fb: FormBuilder) {
+  this.encuestaForm = this.fb.group({
+    titulo: ['', [Validators.required, Validators.minLength(3)]],
+    descripcion: [''], // <-- ESTO ELIMINA EL ERROR ROJO
+    tiempoLimite: [0],
+    preguntas: this.fb.array([])
+=======
+>>>>>>> 6a45e40
   // 1. Definición del formulario con validación de tiempo (mínimo 1)
   encuestaForm: FormGroup = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(3)]],
     descripcion: [''],
     tiempo_limite: [null, [Validators.min(1)]], 
     preguntas: this.fb.array([]) 
+>>>>>>> 7f07b40 (Cambios gonzalo)
   });
+}
 
+<<<<<<< HEAD
+  get preguntasArray(): FormArray {
+    return this.encuestaForm.get('preguntas') as FormArray;
+  }
+
+  // Crea una pregunta con todos los campos de tu HTML
+  crearPregunta(): FormGroup {
+    return this.fb.group({
+      texto: ['', Validators.required],
+      obligatoria: [false],
+      limite: ['250']
+    });
+  }
+
+  addPregunta(): void {
+    this.preguntasArray.push(this.crearPregunta());
+  }
+
+  removePregunta(index: number): void {
+    this.preguntasArray.removeAt(index);
+  }
+
+  onSubmit(): void {
+    if (this.encuestaForm.valid) {
+      console.log('Datos listos para enviar:', this.encuestaForm.value);
+    }
+  }
+}
+=======
   isEditMode = false;       
   encuestaId: string | null = null; 
 
@@ -101,3 +137,4 @@ export class CrearEncuestaComponent implements OnInit {
     setTimeout(() => { this.router.navigate(['/']); }, 100); 
   }
 }
+>>>>>>> 7f07b40 (Cambios gonzalo)

@@ -23,52 +23,15 @@ export class EncuestaDetalleComponent implements OnInit {
   cargando: boolean = true;
 
   ngOnInit() {
-    // 1. Obtenemos el ID de la URL
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log('👁️ Viendo detalles del ID:', id);
+    // 1. Obtenemos datos precargados
+    this.encuesta = this.route.snapshot.data['encuesta'];
 
-    if (id) {
-      this.cargarDatosCompletos(id);
-    }
-  }
+    // 2. Obtenemos preguntas precargadas (si existen)
+    // El backend devuelve array directo o { preguntas: [] } dependiendo del endpoint,
+    // pero el resolver usa getPreguntas que devuelve array. Validemos por si acaso.
+    const resPreguntas = this.route.snapshot.data['preguntas'];
+    this.preguntas = Array.isArray(resPreguntas) ? resPreguntas : (resPreguntas?.preguntas || []);
 
-  cargarDatosCompletos(id: string) {
-    this.cargando = true;
-
-    this.apiService.getEncuestaPorId(id).subscribe({
-      next: (data) => {
-        console.log(' Encuesta recibida:', data);
-        this.encuesta = data;
-        
-        this.cd.detectChanges();
-
-        this.cargarPreguntas(id);
-      },
-      error: (err) => {
-        console.error(' Error cargando encuesta:', err);
-        this.cargando = false;
-        this.cd.detectChanges();
-      }
-    });
-  }
-
-  cargarPreguntas(idEncuesta: string) {
-    console.log(' Pidiendo preguntas para:', idEncuesta);
-
-    this.apiService.getPreguntas(idEncuesta).subscribe({
-      next: (data: any) => {
-        console.log(' Preguntas recibidas:', data);
-        this.preguntas = data;
-        this.cargando = false; // Fin de la carga
-        
-        //   Pinta la lista de preguntas
-        this.cd.detectChanges();
-      },
-      error: (err) => {
-        console.error(' Error cargando preguntas:', err);
-        this.cargando = false;
-        this.cd.detectChanges();
-      }
-    });
+    this.cargando = false;
   }
 }

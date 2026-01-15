@@ -1,0 +1,28 @@
+<div class="container fade-in">
+    <div class="header-actions">
+        <h2>Gestión de Cursos</h2>
+        <a routerLink="/crear-curso" class="btn-primary">
+            <span class="icon">+</span> Nuevo Curso
+        </a>
+    </div>
+
+    <div class="grid-layout">
+        <div class="card" *ngFor="let c of cursos">
+            <div class="card-header">
+                <h3>{{ c.nombre_curso }}</h3>
+                <span class="badge year">{{ c.anio }}</span>
+            </div>
+            <div class="card-body">
+                <p>{{ c.descripcion }}</p>
+            </div>
+            <div class="card-footer">
+                <button [routerLink]="['/editar-curso', c._id]" class="btn-text">Editar</button>
+                <button (click)="c._id && borrarCurso(c._id)" class="btn-text delete">Eliminar</button>
+            </div>
+        </div>
+
+        <div *ngIf="cursos.length === 0" class="no-data">
+            <p>No hay cursos registrados.</p>
+        </div>
+    </div>
+</div>

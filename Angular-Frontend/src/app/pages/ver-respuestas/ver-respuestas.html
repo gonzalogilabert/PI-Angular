@@ -1,0 +1,78 @@
+<div class="container fade-in">
+    <div class="header">
+        <h1>Resultados de la Encuesta</h1>
+        <div class="subtitle">
+            <span *ngIf="!loading">Total de respuestas: {{ resultados.length }}</span>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="error" class="alert error">
+        <h3>Error al cargar:</h3>
+        <pre>{{ error | json }}</pre>
+    </div>
+
+    <div *ngIf="!loading && resultados.length === 0" class="empty-state">
+        <p>Aún no hay respuestas para esta encuesta.</p>
+        <button class="btn-primary" routerLink="/">Volver al Inicio</button>
+    </div>
+
+    <div class="respuestas-grid" *ngIf="!loading && resultados.length > 0">
+        <!-- Iteramos sobre cada "Examen/Respuesta" completa de un usuario -->
+        <div *ngFor="let resultado of resultados; let i = index" class="card respuesta-card">
+            <div class="card-header">
+                <div class="user-info">
+                    <span class="avatar">👤</span>
+                    <div>
+                        <h3>{{ resultado.cabecera.id_usuario?.nombre_completo || 'Usuario Desconocido' }}</h3>
+                        <small>{{ resultado.cabecera.id_usuario?.email }}</small>
+                    </div>
+                </div>
+                <div class="meta">
+                    <span class="date">{{ resultado.cabecera.fecha_respuesta | date:'medium' }}</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h4>Respuestas:</h4>
+                <ul class="respuestas-list">
+                    <li *ngFor="let detalle of resultado.detalles" class="respuesta-item">
+                        <div class="pregunta">
+                            <strong>{{ detalle.id_pregunta?.texto_pregunta || 'Respuesta guardada' }}</strong>
+                        </div>
+
+                        <div class="respuesta-valor">
+                            <!-- Respuesta Texto -->
+                            <span *ngIf="detalle.respuesta_texto" class="texto">
+                                "{{ detalle.respuesta_texto }}"
+                            </span>
+
+                            <!-- Respuesta Numero -->
+                            <span *ngIf="detalle.respuesta_numero !== null && detalle.respuesta_numero !== undefined"
+                                class="numero">
+                                {{ detalle.respuesta_numero }}
+                            </span>
+
+                            <!-- Opciones Seleccionadas -->
+                            <span *ngIf="detalle.opciones_seleccionadas?.length > 0" class="opciones">
+                                Selected: {{ getOpcionesTexto(detalle) }}
+                            </span>
+
+                            <!-- Fallback si todo está vacío -->
+                            <span
+                                *ngIf="!detalle.respuesta_texto && (detalle.respuesta_numero === null || detalle.respuesta_numero === undefined) && (!detalle.opciones_seleccionadas || detalle.opciones_seleccionadas.length === 0)"
+                                class="vacio">
+                                (Sin respuesta)
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions-footer">
+        <button class="btn-secondary" routerLink="/">Volver</button>
+    </div>
+</div>

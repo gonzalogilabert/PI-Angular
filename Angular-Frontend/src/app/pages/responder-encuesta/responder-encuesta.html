@@ -1,0 +1,86 @@
+<div class="container fade-in">
+  <div class="header">
+    <h1>Responder Encuesta</h1>
+    <p>Por favor completa las preguntas a continuación</p>
+  </div>
+
+  <div *ngIf="error" class="alert error">
+    <h3>Error:</h3>
+    <pre>{{ error | json }}</pre>
+  </div>
+
+  <div *ngIf="mensajeExito" class="alert success">
+    {{ mensajeExito }}
+  </div>
+
+  <!-- Identificación temporal del usuario -->
+  <div class="user-auth-mock" *ngIf="!loading && preguntas.length > 0">
+    <label>ID de Usuario (Simulación):</label>
+    <input type="text" [(ngModel)]="usuarioIdInput" placeholder="Pega un ID de usuario válido de MongoDB">
+    <small>Necesario porque no hay login implementado aún.</small>
+  </div>
+
+  <form [formGroup]="respuestasForm" (ngSubmit)="enviarRespuestas()" *ngIf="!loading && preguntas.length > 0">
+    <div formArrayName="respuestas">
+      <div *ngFor="let control of respuestasControls; let i = index" [formGroupName]="i" class="card question-card">
+
+        <h3 class="question-text">
+          <span class="badget">{{ i + 1 }}</span>
+          {{ control.get('texto_pregunta')?.value }}
+        </h3>
+
+        <!-- TIPO: TEXTO -->
+        <div *ngIf="control.get('tipo')?.value === 'texto'" class="form-group">
+          <textarea formControlName="respuesta_texto" placeholder="Escribe tu respuesta aquí..." rows="3">
+          </textarea>
+        </div>
+
+        <!-- TIPO: NUMERO (Asumiendo que existe) -->
+        <div *ngIf="control.get('tipo')?.value === 'numero' || control.get('tipo')?.value === 'number'"
+          class="form-group">
+          <input type="number" formControlName="respuesta_numero" placeholder="0">
+        </div>
+
+        <!-- TIPO: SELECCION MULTIPLE (Asumiendo que 'preguntas' trae 'opciones') -->
+        <div *ngIf="control.get('tipo')?.value === 'seleccion-multiple' || control.get('tipo')?.value === 'multiple'"
+          class="form-group options-list">
+          <!-- Nota: Necesitamos que la pregunta original tenga .opciones -->
+          <!-- Aquí accedemos a la pregunta original usando el índice -->
+          <div *ngFor="let opcion of preguntas[i].opciones" class="checkbox-option">
+            <label>
+              <input type="checkbox" [value]="opcion._id" (change)="onCheckboxChange($event, i, opcion._id)">
+              {{ opcion.texto }}
+            </label>
+          </div>
+        </div>
+
+        <!-- TIPO: SELECCION SIMPLE (Asumiendo radio) -->
+        <div *ngIf="control.get('tipo')?.value === 'seleccion-simple' || control.get('tipo')?.value === 'simple'"
+          class="form-group options-list">
+          <!-- Como el backend espera array, manejamos lógica especial o un simple radio -->
+          <!-- Para simplificar, asumimos que el backend puede tomar array de 1 elemento -->
+          <!-- O adaptaremos el value accessor -->
+          <div *ngFor="let opcion of preguntas[i].opciones" class="radio-option">
+            <label>
+              <!-- Truco: usamos change para setear el array manualmente si el formControl espera array -->
+              <input type="radio" name="radio_{{i}}" [value]="opcion._id"
+                (change)="control.get('opciones_seleccionadas')?.setValue([opcion._id])">
+              {{ opcion.texto }}
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-secondary" routerLink="/">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="!usuarioIdInput">Enviar Respuestas</button>
+    </div>
+  </form>
+
+  <div *ngIf="!loading && preguntas.length === 0 && !error" class="empty-state">
+    <p>No hay preguntas en esta encuesta.</p>
+    <button class="btn-primary" routerLink="/">Volver</button>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container fade-in">
+    <div class="card form-card">
+        <div class="card-header">
+            <h2>{{ isEditMode ? 'Editar Curso' : 'Nuevo Curso' }}</h2>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label for="nombre_curso">Nombre del Curso</label>
+                    <input type="text" id="nombre_curso" formControlName="nombre_curso"
+                        [class.is-invalid]="submitted && form.get('nombre_curso')?.invalid" class="form-control"
+                        placeholder="Ej. Desarrollo Web Fullstack">
+                    <div class="invalid-feedback" *ngIf="submitted && form.get('nombre_curso')?.errors?.['required']">
+                        El nombre es obligatorio
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" formControlName="descripcion"
+                        [class.is-invalid]="submitted && form.get('descripcion')?.invalid" class="form-control" rows="3"
+                        placeholder="Breve descripción del curso..."></textarea>
+                    <div class="invalid-feedback" *ngIf="submitted && form.get('descripcion')?.errors?.['required']">
+                        La descripción es obligatoria
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="anio">Año Académico</label>
+                    <input type="number" id="anio" formControlName="anio"
+                        [class.is-invalid]="submitted && form.get('anio')?.invalid" class="form-control">
+                    <div class="invalid-feedback" *ngIf="submitted && form.get('anio')?.errors?.['required']">
+                        El año es obligatorio
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" routerLink="/cursos" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary" [disabled]="form.invalid && submitted">
+                        {{ isEditMode ? 'Actualizar' : 'Crear' }}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

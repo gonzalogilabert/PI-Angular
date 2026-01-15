@@ -75,6 +75,46 @@ button { cursor: pointer; border: none; padding: 8px 12px; border-radius: 6px; f
   align-items: center;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+.no-preguntas { text-align: center; color: #999; margin: 20px 0; font-style: italic; }
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.form-section, .preguntas-section {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pregunta-card {
+  border: 1px solid #dee2e6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+}
+
+.pregunta-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.btn-add { background-color: #1296d6; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+.btn-delete { background-color: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+.btn-submit { width: 100%; background-color: #082b6e; color: white; padding: 12px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; }
+.btn-submit:disabled { background-color: #ccc; }
+=======
+>>>>>>> 6a45e40
 .config-item {
   display: flex;
   align-items: center;
@@ -104,4 +144,9 @@ button { cursor: pointer; border: none; padding: 8px 12px; border-radius: 6px; f
   font-size: 0.8rem;
   margin-top: 4px;
   display: block;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7f07b40 (Cambios gonzalo)
+>>>>>>> 6a45e40
