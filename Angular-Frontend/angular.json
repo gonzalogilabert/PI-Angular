@@ -9,6 +9,7 @@
         "@schematics/angular:component": {
           "style": "scss"
         }
+        
       },
       "root": "",
       "sourceRoot": "src",
@@ -27,8 +28,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
-            ],
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.scss"
+],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
