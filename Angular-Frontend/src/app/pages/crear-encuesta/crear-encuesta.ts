@@ -18,51 +18,44 @@ export class CrearEncuestaComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  // Definición del formulario
+  // 1. Definición del formulario con validación de tiempo (mínimo 1)
   encuestaForm: FormGroup = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(3)]],
     descripcion: [''],
+    tiempo_limite: [null, [Validators.min(1)]], 
     preguntas: this.fb.array([]) 
   });
 
   isEditMode = false;       
   encuestaId: string | null = null; 
 
-  // Getter para acceder fácil al array de preguntas en el HTML
   get preguntasArray() {
     return this.encuestaForm.get('preguntas') as FormArray;
   }
 
   ngOnInit() {
-    // Comprobamos si hay un ID en la URL (ej: /editar-encuesta/12345)
     this.encuestaId = this.route.snapshot.paramMap.get('id');
-
     if (this.encuestaId) {
       this.isEditMode = true;
       this.cargarDatosParaEditar(this.encuestaId);
     }
   }
 
-  // Cargar datos del servidor al formulario 
-  
   cargarDatosParaEditar(id: string) {
-    // 1. Pedimos la información de la encuesta (Título y Descripción)
     this.apiService.getEncuestaPorId(id).subscribe((data: any) => {
       this.encuestaForm.patchValue({
         titulo: data.titulo,
-        descripcion: data.descripcion
+        descripcion: data.descripcion,
+        tiempo_limite: data.tiempo_limite
       });
 
-      // 2. Pedimos las preguntas asociadas a esa encuesta
       this.apiService.getPreguntas(id).subscribe((preguntas: any[]) => {
-        
-        // Limpiamos el array por si tenía algo basura
         this.preguntasArray.clear();
-
-        // Rellenamos el formulario con las preguntas que vienen de la BD
         preguntas.forEach(p => {
           const preguntaGroup = this.fb.group({
-            texto_pregunta: [p.texto_pregunta, Validators.required]
+            texto_pregunta: [p.texto_pregunta, Validators.required],
+            es_obligatoria: [p.es_obligatoria || false],
+            limite_caracteres: [p.limite_caracteres || 0]
           });
           this.preguntasArray.push(preguntaGroup);
         });
@@ -70,20 +63,20 @@ export class CrearEncuestaComponent implements OnInit {
     });
   }
 
-  // Añadir una pregunta vacía al formulario
+  // 2. Añadir pregunta con los nuevos campos
   addPregunta() {
     const preguntaGroup = this.fb.group({
-      texto_pregunta: ['', Validators.required]
+      texto_pregunta: ['', Validators.required],
+      es_obligatoria: [false], 
+      limite_caracteres: [0] 
     });
     this.preguntasArray.push(preguntaGroup);
   }
 
-  // Eliminar una pregunta del formulario
   removePregunta(index: number) {
     this.preguntasArray.removeAt(index);
   }
 
-  // Enviar datos al servidor
   onSubmit() {
     if (this.encuestaForm.invalid) {
       this.encuestaForm.markAllAsTouched();
@@ -91,31 +84,20 @@ export class CrearEncuestaComponent implements OnInit {
     }
 
     const datos = this.encuestaForm.value;
-
     if (this.isEditMode && this.encuestaId) {
       this.apiService.actualizarEncuesta(this.encuestaId, datos).subscribe({
-        next: () => {
-          alert(' Encuesta actualizada correctamente');
-          this.irAlInicioConRetraso();
-        },
+        next: () => { alert('Encuesta actualizada'); this.irAlInicioConRetraso(); },
         error: (err) => console.error(err)
       });
-
     } else {
       this.apiService.crearEncuesta(datos).subscribe({
-        next: () => {
-          alert(' Encuesta creada correctamente');
-          this.irAlInicioConRetraso();
-        },
+        next: () => { alert('Encuesta creada'); this.irAlInicioConRetraso(); },
         error: (err) => console.error(err)
       });
     }
   }
 
-  
   irAlInicioConRetraso() {
-    setTimeout(() => {
-      this.router.navigate(['/']);
-    }, 100); 
+    setTimeout(() => { this.router.navigate(['/']); }, 100); 
   }
 }

@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h2>📝 Nueva Encuesta</h2>
+  <h2>Nueva Encuesta</h2>
 
   <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
     
@@ -9,37 +9,54 @@
       
       <label>Descripción:</label>
       <textarea formControlName="descripcion" rows="3" placeholder="Breve descripción..."></textarea>
+
+      <label>Tiempo Límite (minutos):</label>
+      <input type="number" formControlName="tiempo_limite" min="1" placeholder="Ej: 15 (deja vacío para sin límite)">
+      @if (encuestaForm.get('tiempo_limite')?.invalid && encuestaForm.get('tiempo_limite')?.touched) {
+        <small class="error-text">El tiempo debe ser mayor a 0.</small>
+      }
     </div>
 
     <div class="preguntas-section">
       <div class="section-header">
         <h3>Preguntas ({{ preguntasArray.controls.length }})</h3>
-        <button type="button" class="btn-add" (click)="addPregunta()">
-          + Añadir Pregunta
-        </button>
+        <button type="button" class="btn-add" (click)="addPregunta()">+ Añadir Pregunta</button>
       </div>
 
       <div formArrayName="preguntas">
         @for (pregunta of preguntasArray.controls; track $index) {
-          
           <div [formGroupName]="$index" class="pregunta-card">
             <div class="pregunta-header">
               <span>Pregunta #{{ $index + 1 }}</span>
-              <button type="button" class="btn-delete" (click)="removePregunta($index)">🗑️ Borrar</button>
+              <button type="button" class="btn-delete" (click)="removePregunta($index)">Borrar</button>
             </div>
             
             <input type="text" formControlName="texto_pregunta" placeholder="Escribe tu pregunta aquí...">
-          </div>
 
-        } @empty {
-          <p class="no-preguntas">No hay preguntas. ¡Pulsa el botón de añadir!</p>
+            <div class="pregunta-config">
+              <div class="config-item">
+                <input type="checkbox" formControlName="es_obligatoria" [id]="'req-' + $index">
+                <label [for]="'req-' + $index" class="label-inline">Obligatoria</label>
+              </div>
+
+              <div class="config-item">
+                <label class="label-inline">Límite:</label>
+                <select formControlName="limite_caracteres" class="form-select-sm">
+                  <option [value]="0">Sin límite</option>
+                  <option [value]="50">50 car.</option>
+                  <option [value]="100">100 car.</option>
+                  <option [value]="150">150 car.</option>
+                  <option [value]="250">250 car.</option>
+                </select>
+              </div>
+            </div>
+          </div>
         }
       </div>
     </div>
 
     <button type="submit" class="btn-submit" [disabled]="encuestaForm.invalid">
-      💾 Guardar Encuesta
+      Guardar Encuesta
     </button>
-
   </form>
 </div>
