@@ -4,9 +4,9 @@ import "dotenv/config";
 // 2. IMPORTS LIBRERÍAS
 import express from "express";
 import cors from "cors";
-// import mongoose from "mongoose"; // <-- YA NO LO NECESITAS AQUÍ, LO USAS EN DB.JS
+// import mongoose from "mongoose"; 
 
-// 3. IMPORTAR LA CONEXIÓN (AQUÍ ESTÁ LA CLAVE)
+// 3. IMPORTAR LA CONEXIÓN 
 import { connectDB } from "./db.js";
 
 
