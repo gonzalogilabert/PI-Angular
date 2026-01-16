@@ -1,8 +1,8 @@
 <div class="container fade-in">
     <div class="header-actions">
-        <h2>Gestión de Cursos</h2>
+        <h2><span class="material-icons">school</span> Gestión de Cursos</h2>
         <a routerLink="/crear-curso" class="btn-primary">
-            <span class="icon">+</span> Nuevo Curso
+            <span class="material-icons">add_circle</span> Nuevo Curso
         </a>
     </div>
 
@@ -16,8 +16,12 @@
                 <p>{{ c.descripcion }}</p>
             </div>
             <div class="card-footer">
-                <button [routerLink]="['/editar-curso', c._id]" class="btn-text">Editar</button>
-                <button (click)="c._id && borrarCurso(c._id)" class="btn-text delete">Eliminar</button>
+                <button [routerLink]="['/editar-curso', c._id]" class="btn-text">
+                    <span class="material-icons">edit</span> Editar
+                </button>
+                <button (click)="c._id && borrarCurso(c._id)" class="btn-text delete">
+                    <span class="material-icons">delete</span> Eliminar
+                </button>
             </div>
         </div>
 

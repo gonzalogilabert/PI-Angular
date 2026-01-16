@@ -1,17 +1,29 @@
 // Estilos del Menú Principal
 .navbar {
-  background-color: #333;
+  background-color: var(--dark-blue);
   color: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
   .brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #4fc3f7; // Un azulito estilo Angular
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      // El logo original tiene colores corporativos, manteniéndolos sobre el fondo blanco.
+      // Probaré sin filtro primero para ver cómo queda con el azul oscuro del navbar.
+      // Si el logo es oscuro, igual necesita un fondo blanco o ser blanco.
+      // El logo subido tiene fondo blanco.
+      background-color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
   }
 
   .menu-items {
@@ -20,20 +32,20 @@
 
     .nav-link {
       color: white;
-      text-decoration: none; // Quita el subrayado feo
+      text-decoration: none;
       font-weight: 500;
       padding: 8px 12px;
       border-radius: 4px;
       transition: background 0.3s;
 
       &:hover {
-        background-color: #555;
+        background-color: var(--primary-blue);
       }
 
-     
+
       &.active {
-        background-color: #4fc3f7;
-        color: #333;
+        background-color: var(--primary-blue);
+        color: white;
       }
     }
   }

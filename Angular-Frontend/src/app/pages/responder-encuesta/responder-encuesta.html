@@ -1,21 +1,21 @@
 <div class="container fade-in">
   <div class="header">
-    <h1>Responder Encuesta</h1>
+    <h1><span class="material-icons">assignment</span> Responder Encuesta</h1>
     <p>Por favor completa las preguntas a continuación</p>
   </div>
 
   <div *ngIf="error" class="alert error">
-    <h3>Error:</h3>
+    <h3><span class="material-icons">error_outline</span> Error:</h3>
     <pre>{{ error | json }}</pre>
   </div>
 
   <div *ngIf="mensajeExito" class="alert success">
-    {{ mensajeExito }}
+    <span class="material-icons">check_circle</span> {{ mensajeExito }}
   </div>
 
   <!-- Identificación temporal del usuario -->
   <div class="user-auth-mock" *ngIf="!loading && preguntas.length > 0">
-    <label>ID de Usuario (Simulación):</label>
+    <label><span class="material-icons">badge</span> ID de Usuario (Simulación):</label>
     <input type="text" [(ngModel)]="usuarioIdInput" placeholder="Pega un ID de usuario válido de MongoDB">
     <small>Necesario porque no hay login implementado aún.</small>
   </div>
@@ -74,13 +74,19 @@
     </div>
 
     <div class="actions">
-      <button type="button" class="btn-secondary" routerLink="/">Cancelar</button>
-      <button type="submit" class="btn-primary" [disabled]="!usuarioIdInput">Enviar Respuestas</button>
+      <button type="button" class="btn-secondary" routerLink="/">
+        <span class="material-icons">cancel</span> Cancelar
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="!usuarioIdInput">
+        <span class="material-icons">send</span> Enviar Respuestas
+      </button>
     </div>
   </form>
 
   <div *ngIf="!loading && preguntas.length === 0 && !error" class="empty-state">
     <p>No hay preguntas en esta encuesta.</p>
-    <button class="btn-primary" routerLink="/">Volver</button>
+    <button class="btn-primary" routerLink="/">
+      <span class="material-icons">arrow_back</span> Volver
+    </button>
   </div>
 </div>

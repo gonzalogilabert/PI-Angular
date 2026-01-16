@@ -1,16 +1,18 @@
 <nav class="navbar">
-  <div class="brand">📊 EncuestasApp</div>
+  <a routerLink="/" class="brand">
+    <img src="logo.png" alt="Logo Campus Cámara" class="logo-img">
+  </a>
 
   <div class="menu-items">
-    <a routerLink="/" class="nav-link">🏠 Inicio</a>
-
-    <a routerLink="/crear-encuesta" class="nav-link">➕ Crear Encuesta</a>
-    <a routerLink="/usuarios" class="nav-link">👥 Usuarios</a>
-    <a routerLink="/cursos" class="nav-link">📚 Cursos</a>
+    <a routerLink="/" class="nav-link"><span class="material-icons">home</span> Inicio</a>
+    <a routerLink="/crear-encuesta" class="nav-link"><span class="material-icons">add_circle</span> Crear Encuesta</a>
+    <a routerLink="/usuarios" class="nav-link"><span class="material-icons">group</span> Usuarios</a>
+    <a routerLink="/cursos" class="nav-link"><span class="material-icons">school</span> Cursos</a>
   </div>
 </nav>
-
 
 <div class="main-content">
   <router-outlet></router-outlet>
 </div>
+
+<app-toast></app-toast>

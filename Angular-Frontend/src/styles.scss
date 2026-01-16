@@ -11,9 +11,19 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.bg-custom-primary { background-color: var(--primary-blue); color: white; }
-.bg-custom-dark { background-color: var(--dark-blue); color: white; }
-.text-custom-primary { color: var(--primary-blue); }
+.bg-custom-primary {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.bg-custom-dark {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+.text-custom-primary {
+  color: var(--primary-blue);
+}
 
 .card-container {
   background-color: var(--light-gray);
@@ -21,4 +31,41 @@ body {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+}
+
+/* Material Icons Styles */
+.material-icons {
+  font-size: 1.2em;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+h1 .material-icons,
+h2 .material-icons,
+h3 .material-icons {
+  font-size: 1em;
+  vertical-align: text-bottom;
+}
+
+.btn-icon .material-icons {
+  font-size: 1em;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.nav-link .material-icons {
+  font-size: 1.1em;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.brand .material-icons {
+  font-size: 1.3em;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+small .material-icons {
+  font-size: 0.9em;
+  vertical-align: text-bottom;
 }

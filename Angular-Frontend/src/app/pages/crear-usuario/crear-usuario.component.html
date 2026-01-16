@@ -1,14 +1,15 @@
 <div class="container fade-in">
     <div class="card form-card">
         <div class="card-header">
-            <h2>{{ isEditMode ? 'Editar Usuario' : 'Nuevo Usuario' }}</h2>
+            <h2><span class="material-icons">{{ isEditMode ? 'person' : 'person_add' }}</span> {{ isEditMode ? 'Editar
+                Usuario' : 'Nuevo Usuario' }}</h2>
         </div>
 
         <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <div class="form-group">
-                    <label for="nombre_completo">Nombre Completo</label>
+                    <label for="nombre_completo"><span class="material-icons">badge</span> Nombre Completo</label>
                     <input type="text" id="nombre_completo" formControlName="nombre_completo"
                         [class.is-invalid]="submitted && form.get('nombre_completo')?.invalid" class="form-control"
                         placeholder="Ej. Juan Pérez">
@@ -19,7 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email"><span class="material-icons">email</span> Email</label>
                     <input type="email" id="email" formControlName="email"
                         [class.is-invalid]="submitted && form.get('email')?.invalid" class="form-control"
                         placeholder="ejemplo@correo.com">
@@ -32,7 +33,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Contraseña {{ isEditMode ? '(Opcional)' : '' }}</label>
+                    <label for="password"><span class="material-icons">lock</span> Contraseña {{ isEditMode ?
+                        '(Opcional)' : '' }}</label>
                     <input type="password" id="password" formControlName="password"
                         [class.is-invalid]="submitted && form.get('password')?.invalid" class="form-control"
                         placeholder="Ingrese contraseña">
@@ -45,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="rol">Rol</label>
+                    <label for="rol"><span class="material-icons">manage_accounts</span> Rol</label>
                     <select id="rol" formControlName="rol" class="form-control">
                         <option value="Alumno">Alumno</option>
                         <option value="Profesor">Profesor</option>
@@ -54,9 +56,11 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" routerLink="/usuarios" class="btn-secondary">Cancelar</button>
+                    <button type="button" routerLink="/usuarios" class="btn-secondary">
+                        <span class="material-icons">cancel</span> Cancelar
+                    </button>
                     <button type="submit" class="btn-primary" [disabled]="form.invalid && submitted">
-                        {{ isEditMode ? 'Actualizar' : 'Crear' }}
+                        <span class="material-icons">save</span> {{ isEditMode ? 'Actualizar' : 'Crear' }}
                     </button>
                 </div>
 

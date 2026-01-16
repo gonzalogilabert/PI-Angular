@@ -13,15 +13,16 @@
     width: 100%;
     max-width: 600px;
     overflow: hidden;
+    border: 1px solid var(--border-gray);
 
     .card-header {
-        background: #f8f9fa;
+        background: var(--light-gray);
         padding: 1.5rem 2rem;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-gray);
 
         h2 {
             margin: 0;
-            color: #2c3e50;
+            color: var(--dark-blue);
             font-size: 1.5rem;
         }
     }
@@ -37,30 +38,30 @@
     label {
         display: block;
         margin-bottom: 0.5rem;
-        color: #34495e;
+        color: var(--dark-blue);
         font-weight: 500;
     }
 
     .form-control {
         width: 100%;
         padding: 0.8rem;
-        border: 1px solid #ddd;
+        border: 1px solid var(--border-gray);
         border-radius: 8px;
         font-size: 1rem;
         transition: border-color 0.2s;
 
         &:focus {
             outline: none;
-            border-color: #3498db;
+            border-color: var(--primary-blue);
         }
 
         &.is-invalid {
-            border-color: #e74c3c;
+            border-color: #dc3545;
         }
     }
 
     .invalid-feedback {
-        color: #e74c3c;
+        color: #dc3545;
         font-size: 0.85rem;
         margin-top: 0.4rem;
     }
@@ -72,7 +73,7 @@
     gap: 1rem;
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-gray);
 
     button {
         padding: 0.8rem 1.5rem;
@@ -84,25 +85,26 @@
         transition: all 0.2s;
 
         &.btn-secondary {
-            background: #ecf0f1;
-            color: #7f8c8d;
+            background: var(--light-gray);
+            color: var(--dark-blue);
+            border: 1px solid var(--border-gray);
 
             &:hover {
-                background: #dfe6e9;
+                background: var(--border-gray);
             }
         }
 
         &.btn-primary {
-            background: #3498db;
+            background: var(--primary-blue);
             color: white;
 
             &:hover {
-                background: #2980b9;
+                background: var(--dark-blue);
                 transform: translateY(-2px);
             }
 
             &:disabled {
-                background: #bdc3c7;
+                background: var(--border-gray);
                 transform: none;
                 cursor: not-allowed;
             }

@@ -1,6 +1,6 @@
 <div class="detalle-container">
 
-  <a routerLink="/" class="btn-back">⬅ Volver al Inicio</a>
+  <a routerLink="/" class="btn-back"><span class="material-icons">arrow_back</span> Volver al Inicio</a>
 
   @if (encuesta) {
 
@@ -10,14 +10,15 @@
 
     <div class="meta">
       <span class="badge">ID: {{ encuesta._id }}</span>
-      <span class="date">📅 {{ encuesta.fecha_creacion | date:'dd/MM/yyyy' }}</span>
+      <span class="date"><span class="material-icons">calendar_today</span> {{ encuesta.fecha_creacion |
+        date:'dd/MM/yyyy' }}</span>
     </div>
   </header>
 
   <hr>
 
   <section class="preguntas-section">
-    <h3>📋 Preguntas ({{ preguntas.length }})</h3>
+    <h3><span class="material-icons">list_alt</span> Preguntas ({{ preguntas.length }})</h3>
 
     @for (pregunta of preguntas; track $index) {
     <div class="pregunta-card">
@@ -28,7 +29,7 @@
       </div>
     </div>
     } @empty {
-    <p class="no-preguntas">s Esta encuesta no tiene preguntas asociadas.</p>
+    <p class="no-preguntas">Esta encuesta no tiene preguntas asociadas.</p>
     }
   </section>
 
@@ -36,7 +37,7 @@
 
   @else {
   <div class="error-state">
-    <h2> Error</h2>
+    <h2><span class="material-icons">error</span> Error</h2>
     <p>No se ha podido encontrar la encuesta.</p>
     <a routerLink="/">Volver</a>
   </div>

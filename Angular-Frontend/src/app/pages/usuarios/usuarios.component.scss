@@ -11,14 +11,14 @@
   margin-bottom: 2rem;
 
   h2 {
-    color: #2c3e50;
+    color: var(--dark-blue);
     margin: 0;
     font-size: 1.8rem;
   }
 }
 
 .btn-primary {
-  background: #3498db;
+  background: var(--primary-blue);
   color: white;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
@@ -28,19 +28,19 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+  box-shadow: 0 4px 6px rgba(18, 150, 214, 0.2);
 
   &:hover {
-    background: #2980b9;
+    background: var(--dark-blue);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 6px 12px rgba(18, 150, 214, 0.3);
   }
 }
 
 .table-responsive {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
@@ -48,14 +48,15 @@
   width: 100%;
   border-collapse: collapse;
 
-  th, td {
+  th,
+  td {
     padding: 1rem 1.5rem;
     text-align: left;
   }
 
   th {
-    background: #f8f9fa;
-    color: #7f8c8d;
+    background: var(--light-gray);
+    color: var(--dark-blue);
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -63,7 +64,7 @@
   }
 
   tr {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-gray);
     transition: background 0.2s;
 
     &:last-child {
@@ -71,7 +72,7 @@
     }
 
     &:hover {
-      background: #fcfcfc;
+      background: var(--light-gray);
     }
   }
 }
@@ -82,9 +83,20 @@
   font-size: 0.85rem;
   font-weight: 500;
 
-  &.admin { background: #e8f6ff; color: #3498db; }
-  &.profesor { background: #fff0e6; color: #ff9f43; }
-  &.alumno { background: #eafaf1; color: #2ecc71; }
+  &.admin {
+    background: #e8f6ff;
+    color: var(--primary-blue);
+  }
+
+  &.profesor {
+    background: #fff0e6;
+    color: #ff9f43;
+  }
+
+  &.alumno {
+    background: #eafaf1;
+    color: #2ecc71;
+  }
 }
 
 .actions {
@@ -102,7 +114,7 @@
   transition: background 0.2s;
 
   &:hover {
-    background: #f0f0f0;
+    background: var(--light-gray);
   }
 
   &.delete:hover {
@@ -112,7 +124,7 @@
 
 .no-data {
   text-align: center;
-  color: #95a5a6;
+  color: var(--dark-blue);
   padding: 3rem;
 }
 
@@ -121,6 +133,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -64,7 +64,7 @@ export const routes: Routes = [
   {
     path: 'encuesta/:id',
     component: EncuestaDetalleComponent,
-    resolve: { encuesta: encuestaResolver }
+    resolve: { encuesta: encuestaResolver, preguntas: preguntasResolver }
   },
   {
     path: 'responder-encuesta/:id',

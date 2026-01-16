@@ -1,8 +1,9 @@
 <div class="container fade-in">
     <div class="header">
-        <h1>Resultados de la Encuesta</h1>
+        <h1><span class="material-icons">analytics</span> Resultados de la Encuesta</h1>
         <div class="subtitle">
-            <span *ngIf="!loading">Total de respuestas: {{ resultados.length }}</span>
+            <span *ngIf="!loading"><span class="material-icons">analytics</span> Total de respuestas: {{
+                resultados.length }}</span>
         </div>
     </div>
 
@@ -15,7 +16,9 @@
 
     <div *ngIf="!loading && resultados.length === 0" class="empty-state">
         <p>Aún no hay respuestas para esta encuesta.</p>
-        <button class="btn-primary" routerLink="/">Volver al Inicio</button>
+        <button class="btn-primary" routerLink="/">
+            <span class="material-icons">arrow_back</span> Volver al Inicio
+        </button>
     </div>
 
     <div class="respuestas-grid" *ngIf="!loading && resultados.length > 0">
@@ -23,7 +26,7 @@
         <div *ngFor="let resultado of resultados; let i = index" class="card respuesta-card">
             <div class="card-header">
                 <div class="user-info">
-                    <span class="avatar">👤</span>
+                    <span class="avatar"><span class="material-icons">person</span></span>
                     <div>
                         <h3>{{ resultado.cabecera.id_usuario?.nombre_completo || 'Usuario Desconocido' }}</h3>
                         <small>{{ resultado.cabecera.id_usuario?.email }}</small>
@@ -73,6 +76,8 @@
     </div>
 
     <div class="actions-footer">
-        <button class="btn-secondary" routerLink="/">Volver</button>
+        <button class="btn-secondary" routerLink="/">
+            <span class="material-icons">arrow_back</span> Volver
+        </button>
     </div>
 </div>
